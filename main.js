@@ -3,10 +3,13 @@ const productContainer = document.getElementById("product-container");
 
 fetch(apiEndpoint)
   .then((response) => response.json())
-  .then((data) => {
-    console.log("Product data:", data); // Logging data for debugging
-  })
-  .catch((error) => console.error("Fetch error:", error));
+  .then((data) => displayProducts(data))
+  .catch((error) => {
+    // Display an error message in the product container if fetch fails
+    productContainer.innerHTML = `<p>Failed to load products. Please try again later.</p>`;
+    // Log the error in the console for debugging
+    console.error("Fetch error:", error);
+  });
 
 function displayProducts(products) {
   products.forEach((product) => {
